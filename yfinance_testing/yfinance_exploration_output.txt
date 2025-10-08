@@ -1,0 +1,597 @@
+C:\Users\jackw\AppData\Local\Programs\Python\Python311\Lib\site-packages\yfinance\scrapers\fundamentals.py:36: DeprecationWarning: 'Ticker.earnings' is deprecated as not available via API. Look for "Net Income" in Ticker.income_stmt.
+  warnings.warn("'Ticker.earnings' is deprecated as not available via API. Look for \"Net Income\" in Ticker.income_stmt.", DeprecationWarning)
+================================================================================
+YFINANCE COMPREHENSIVE API EXPLORATION
+================================================================================
+
+================================================================================
+TICKER OBJECT ATTRIBUTES
+================================================================================
+
+Total public attributes: 99
+
+Available attributes:
+  - actions
+  - analyst_price_targets
+  - balance_sheet
+  - balancesheet
+  - calendar
+  - capital_gains
+  - cash_flow
+  - cashflow
+  - dividends
+  - earnings
+  - earnings_dates
+  - earnings_estimate
+  - earnings_history
+  - eps_revisions
+  - eps_trend
+  - fast_info
+  - financials
+  - funds_data
+  - get_actions
+  - get_analyst_price_targets
+  - get_balance_sheet
+  - get_balancesheet
+  - get_calendar
+  - get_capital_gains
+  - get_cash_flow
+  - get_cashflow
+  - get_dividends
+  - get_earnings
+  - get_earnings_dates
+  - get_earnings_estimate
+  - get_earnings_history
+  - get_eps_revisions
+  - get_eps_trend
+  - get_fast_info
+  - get_financials
+  - get_funds_data
+  - get_growth_estimates
+  - get_history_metadata
+  - get_income_stmt
+  - get_incomestmt
+  - get_info
+  - get_insider_purchases
+  - get_insider_roster_holders
+  - get_insider_transactions
+  - get_institutional_holders
+  - get_isin
+  - get_major_holders
+  - get_mutualfund_holders
+  - get_news
+  - get_recommendations
+  - get_recommendations_summary
+  - get_revenue_estimate
+  - get_sec_filings
+  - get_shares
+  - get_shares_full
+  - get_splits
+  - get_sustainability
+  - get_upgrades_downgrades
+  - growth_estimates
+  - history
+  - history_metadata
+  - income_stmt
+  - incomestmt
+  - info
+  - insider_purchases
+  - insider_roster_holders
+  - insider_transactions
+  - institutional_holders
+  - isin
+  - live
+  - major_holders
+  - mutualfund_holders
+  - news
+  - option_chain
+  - options
+  - quarterly_balance_sheet
+  - quarterly_balancesheet
+  - quarterly_cash_flow
+  - quarterly_cashflow
+  - quarterly_earnings
+  - quarterly_financials
+  - quarterly_income_stmt
+  - quarterly_incomestmt
+  - recommendations
+  - recommendations_summary
+  - revenue_estimate
+  - sec_filings
+  - session
+  - shares
+  - splits
+  - sustainability
+  - ticker
+  - ttm_cash_flow
+  - ttm_cashflow
+  - ttm_financials
+  - ttm_income_stmt
+  - ttm_incomestmt
+  - upgrades_downgrades
+  - ws
+
+================================================================================
+HISTORICAL PRICE DATA
+================================================================================
+
+1. Different period options:
+  period='1d': 1 rows
+  period='5d': 5 rows
+  period='1mo': 22 rows
+
+2. Date range (2024-01-01 to 2024-01-10):
+  Shape: (6, 7)
+  Columns: ['Open', 'High', 'Low', 'Close', 'Volume', 'Dividends', 'Stock Splits']
+  Index type: <class 'pandas._libs.tslibs.timestamps.Timestamp'>
+
+  Sample data:
+                                 Open        High  ...  Dividends  Stock Splits
+Date                                               ...                         
+2024-01-02 00:00:00-05:00  185.578815  186.857993  ...        0.0           0.0
+2024-01-03 00:00:00-05:00  182.673439  184.319507  ...        0.0           0.0
+2024-01-04 00:00:00-05:00  180.620803  181.552914  ...        0.0           0.0
+2024-01-05 00:00:00-05:00  180.462148  181.225673  ...        0.0           0.0
+2024-01-08 00:00:00-05:00  180.561282  184.041824  ...        0.0           0.0
+2024-01-09 00:00:00-05:00  182.375934  183.595604  ...        0.0           0.0
+
+[6 rows x 7 columns]
+
+3. Testing auto_adjust parameter:
+  auto_adjust=True columns: ['Open', 'High', 'Low', 'Close', 'Volume', 'Dividends', 'Stock Splits']
+  auto_adjust=False columns: ['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume', 'Dividends', 'Stock Splits']
+
+4. Different interval options:
+  interval='1d': 22 rows
+  interval='1wk': 5 rows
+
+================================================================================
+EARNINGS DATA
+================================================================================
+
+1. earnings_dates attribute:
+  Type: <class 'pandas.core.frame.DataFrame'>
+  Shape: (12, 4)
+  Columns: ['EPS Estimate', 'Reported EPS', 'Surprise(%)', 'Event Type']
+  Date range: 2022-10-27 16:30:00-04:00 to 2025-05-01 16:30:00-04:00
+
+  First 10 rows:
+                           EPS Estimate  Reported EPS  Surprise(%) Event Type
+Earnings Date                                                                
+2025-05-01 16:30:00-04:00          1.63          1.65         1.41   Earnings
+2025-02-27 12:00:00-05:00           NaN           NaN          NaN    Meeting
+2025-01-30 16:31:00-05:00          2.35          2.40         2.15   Earnings
+2024-10-31 16:31:00-04:00          1.60          1.64         2.35   Earnings
+2024-08-01 16:30:00-04:00          1.35          1.40         3.99   Earnings
+2024-05-02 16:31:00-04:00          1.50          1.53         1.97   Earnings
+2024-02-01 16:00:00-05:00          2.10          2.18         3.90   Earnings
+2023-11-02 16:30:00-04:00          1.39          1.46         4.92   Earnings
+2023-08-03 16:30:00-04:00          1.19          1.26         5.49   Earnings
+2023-05-04 16:30:00-04:00          1.43          1.52         6.03   Earnings
+
+  Data types:
+EPS Estimate    float64
+Reported EPS    float64
+Surprise(%)     float64
+Event Type       object
+dtype: object
+
+  Missing values per column:
+EPS Estimate    1
+Reported EPS    1
+Surprise(%)     1
+Event Type      0
+dtype: int64
+
+  Negative Reported EPS: 0 occurrences
+  Negative EPS Estimate: 0 occurrences
+
+2. quarterly_earnings attribute:
+
+3. earnings attribute:
+
+================================================================================
+FUNDAMENTAL DATA (info)
+================================================================================
+
+1. Basic info:
+  Type: <class 'dict'>
+  Number of keys: 182
+
+2. Key fundamental metrics by category:
+
+  Valuation:
+    marketCap                     : 3829117222912
+    enterpriseValue               : 3875443310592
+    trailingPE                    : 39.212765
+    forwardPE                     : 31.049335
+    pegRatio                      : NOT AVAILABLE
+    priceToBook                   : 58.23064
+    enterpriseToRevenue           : 9.484
+    enterpriseToEbitda            : 27.35
+
+  Profitability:
+    profitMargins                 : 0.24295999
+    operatingMargins              : 0.29990998
+    returnOnAssets                : 0.24545999
+    returnOnEquity                : 1.49814
+
+  Growth:
+    revenueGrowth                 : 0.096
+    earningsGrowth                : 0.121
+    earningsQuarterlyGrowth       : 0.093
+
+  Dividends:
+    dividendRate                  : 1.04
+    dividendYield                 : 0.4
+    payoutRatio                   : 0.1533
+    exDividendDate                : 1754870400
+
+  Trading:
+    volume                        : 49155614
+    averageVolume                 : 55036182
+    averageVolume10days           : 52765780
+    beta                          : 1.094
+    fiftyTwoWeekHigh              : 260.1
+    fiftyTwoWeekLow               : 169.21
+
+  Company:
+    sector                        : Technology
+    industry                      : Consumer Electronics
+    fullTimeEmployees             : 150000
+    city                          : Cupertino
+    state                         : CA
+    country                       : United States
+
+  Shares:
+    sharesOutstanding             : 14840390000
+    floatShares                   : 14814270914
+    impliedSharesOutstanding      : 14840970951
+
+  Financial Health:
+    totalCash                     : 55372001280
+    totalDebt                     : 101698002944
+    currentRatio                  : 0.868
+    quickRatio                    : 0.724
+    debtToEquity                  : 154.486
+
+  Analyst:
+    targetMeanPrice               : 246.2186
+    targetMedianPrice             : 245.0
+    recommendationKey             : buy
+HTTP Error 404: 
+$INVALIDTICKER123: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+    numberOfAnalystOpinions       : 41
+
+================================================================================
+HOLDER DATA
+================================================================================
+
+1. institutional_holders:
+  Shape: (10, 6)
+  Columns: ['Date Reported', 'Holder', 'pctHeld', 'Shares', 'Value', 'pctChange']
+
+  Sample:
+  Date Reported                         Holder  ...         Value  pctChange
+0    2025-06-30             Vanguard Group Inc  ...  365338966532     0.0108
+1    2025-06-30                 Blackrock Inc.  ...  296423423578     0.0076
+2    2025-06-30       State Street Corporation  ...  155134517104     0.0088
+3    2025-06-30  Geode Capital Management, LLC  ...   91532537950     0.0141
+4    2025-06-30                       FMR, LLC  ...   79149849053    -0.0650
+
+[5 rows x 6 columns]
+
+2. major_holders:
+  Shape: (4, 1)
+  Columns: ['Value']
+
+  Data:
+Breakdown                          Value
+insidersPercentHeld              0.01970
+institutionsPercentHeld          0.63630
+institutionsFloatPercentHeld     0.64909
+institutionsCount             6949.00000
+
+3. insider_roster_holders:
+  Shape: (10, 7)
+  Columns: ['Name', 'Position', 'URL', 'Most Recent Transaction', 'Latest Transaction Date', 'Shares Owned Directly', 'Position Direct Date']
+
+  Sample:
+                Name  ... Position Direct Date
+0  ADAMS KATHERINE L  ...           2025-04-02
+1     COOK TIMOTHY D  ...           2025-04-02
+2        JUNG ANDREA  ...           2025-01-31
+3  KONDO CHRISTOPHER  ...           2025-08-25
+4  LEVINSON ARTHUR D  ...           2025-08-28
+
+[5 rows x 7 columns]
+
+4. insider_transactions:
+  Shape: (71, 9)
+  Columns: ['Shares', 'Value', 'URL', 'Text', 'Insider', 'Position', 'Transaction', 'Start Date', 'Ownership']
+
+  Sample:
+   Shares       Value URL  ... Transaction Start Date Ownership
+0   90000  20886300.0      ...             2025-08-28         D
+1     435         0.0      ...             2025-08-25         D
+2   34821   7772047.0      ...             2025-08-08         D
+3    4486    933955.0      ...             2025-05-12         D
+4    4570    941420.0      ...             2025-04-23         D
+
+[5 rows x 9 columns]
+
+================================================================================
+CORPORATE ACTIONS
+================================================================================
+
+1. dividends:
+  Type: <class 'pandas.core.series.Series'>
+  Length: 88
+  Date range: 1987-05-11 00:00:00-04:00 to 2025-08-11 00:00:00-04:00
+
+  Last 10 dividends:
+Date
+2023-05-12 00:00:00-04:00    0.24
+2023-08-11 00:00:00-04:00    0.24
+2023-11-10 00:00:00-05:00    0.24
+2024-02-09 00:00:00-05:00    0.24
+2024-05-10 00:00:00-04:00    0.25
+2024-08-12 00:00:00-04:00    0.25
+2024-11-08 00:00:00-05:00    0.25
+2025-02-10 00:00:00-05:00    0.25
+2025-05-12 00:00:00-04:00    0.26
+2025-08-11 00:00:00-04:00    0.26
+Name: Dividends, dtype: float64
+
+2. splits:
+  Type: <class 'pandas.core.series.Series'>
+  Length: 5
+  All splits:
+Date
+1987-06-16 00:00:00-04:00    2.0
+2000-06-21 00:00:00-04:00    2.0
+2005-02-28 00:00:00-05:00    2.0
+2014-06-09 00:00:00-04:00    7.0
+2020-08-31 00:00:00-04:00    4.0
+Name: Stock Splits, dtype: float64
+
+3. actions:
+  Shape: (93, 2)
+  Columns: ['Dividends', 'Stock Splits']
+
+  Last 10 actions:
+                           Dividends  Stock Splits
+Date                                              
+2023-05-12 00:00:00-04:00       0.24           0.0
+2023-08-11 00:00:00-04:00       0.24           0.0
+2023-11-10 00:00:00-05:00       0.24           0.0
+2024-02-09 00:00:00-05:00       0.24           0.0
+2024-05-10 00:00:00-04:00       0.25           0.0
+2024-08-12 00:00:00-04:00       0.25           0.0
+2024-11-08 00:00:00-05:00       0.25           0.0
+2025-02-10 00:00:00-05:00       0.25           0.0
+2025-05-12 00:00:00-04:00       0.26           0.0
+2025-08-11 00:00:00-04:00       0.26           0.0
+
+================================================================================
+FINANCIAL STATEMENTS
+================================================================================
+
+1. financials (Income Statement - Annual):
+  Shape: (39, 4)
+  Columns (dates): [Timestamp('2024-09-30 00:00:00'), Timestamp('2023-09-30 00:00:00'), Timestamp('2022-09-30 00:00:00'), Timestamp('2021-09-30 00:00:00')]
+  Number of line items: 39
+
+  All line items:
+    - Tax Effect Of Unusual Items
+    - Tax Rate For Calcs
+    - Normalized EBITDA
+    - Net Income From Continuing Operation Net Minority Interest
+    - Reconciled Depreciation
+    - Reconciled Cost Of Revenue
+    - EBITDA
+    - EBIT
+    - Net Interest Income
+    - Interest Expense
+    - Interest Income
+    - Normalized Income
+    - Net Income From Continuing And Discontinued Operation
+    - Total Expenses
+    - Total Operating Income As Reported
+    - Diluted Average Shares
+    - Basic Average Shares
+    - Diluted EPS
+    - Basic EPS
+    - Diluted NI Availto Com Stockholders
+    - Net Income Common Stockholders
+    - Net Income
+    - Net Income Including Noncontrolling Interests
+    - Net Income Continuous Operations
+    - Tax Provision
+    - Pretax Income
+    - Other Income Expense
+    - Other Non Operating Income Expenses
+    - Net Non Operating Interest Income Expense
+    - Interest Expense Non Operating
+    - Interest Income Non Operating
+    - Operating Income
+    - Operating Expense
+    - Research And Development
+    - Selling General And Administration
+    - Gross Profit
+    - Cost Of Revenue
+    - Total Revenue
+    - Operating Revenue
+
+  Sample (first 10 rows):
+                                                      2024-09-30  ...    2021-09-30
+Tax Effect Of Unusual Items                         0.000000e+00  ...  0.000000e+00
+Tax Rate For Calcs                                  2.410000e-01  ...  1.330000e-01
+Normalized EBITDA                                   1.346610e+11  ...  1.231360e+11
+Net Income From Continuing Operation Net Minori...  9.373600e+10  ...  9.468000e+10
+Reconciled Depreciation                             1.144500e+10  ...  1.128400e+10
+Reconciled Cost Of Revenue                          2.103520e+11  ...  2.129810e+11
+EBITDA                                              1.346610e+11  ...  1.231360e+11
+EBIT                                                1.232160e+11  ...  1.118520e+11
+Net Interest Income                                          NaN  ...  1.980000e+08
+Interest Expense                                             NaN  ...  2.645000e+09
+
+[10 rows x 4 columns]
+
+2. quarterly_financials (Income Statement - Quarterly):
+  Shape: (33, 5)
+  Columns (dates): [Timestamp('2025-06-30 00:00:00'), Timestamp('2025-03-31 00:00:00'), Timestamp('2024-12-31 00:00:00'), Timestamp('2024-09-30 00:00:00'), Timestamp('2024-06-30 00:00:00')]
+
+3. balance_sheet (Annual):
+  Shape: (68, 4)
+  Columns (dates): [Timestamp('2024-09-30 00:00:00'), Timestamp('2023-09-30 00:00:00'), Timestamp('2022-09-30 00:00:00'), Timestamp('2021-09-30 00:00:00')]
+
+  Key line items:
+    - Total Assets: 364,980,000,000
+    - Total Liabilities Net Minority Interest: 308,030,000,000
+    - Stockholders Equity: 56,950,000,000
+    - Cash And Cash Equivalents: 29,943,000,000
+    - Total Debt: 106,629,000,000
+
+4. cashflow (Annual):
+  Shape: (53, 4)
+  Columns (dates): [Timestamp('2024-09-30 00:00:00'), Timestamp('2023-09-30 00:00:00'), Timestamp('2022-09-30 00:00:00'), Timestamp('2021-09-30 00:00:00')]
+
+  Key line items:
+    - Operating Cash Flow: 118,254,000,000
+    - Investing Cash Flow: 2,935,000,000
+    - Financing Cash Flow: -121,983,000,000
+    - Free Cash Flow: 108,807,000,000
+    - Capital Expenditure: -9,447,000,000
+
+================================================================================
+OPTIONS DATA
+================================================================================
+
+1. options (expiration dates):
+  Type: <class 'tuple'>
+  Number of expirations: 21
+  Available dates: ('2025-10-10', '2025-10-17', '2025-10-24', '2025-10-31', '2025-11-07', '2025-11-14', '2025-11-21', '2025-12-19', '2026-01-16', '2026-02-20')
+
+2. option_chain for 2025-10-10:
+  Type: <class 'yfinance.ticker.Options'>
+  Calls shape: (54, 14)
+  Puts shape: (50, 14)
+
+  Calls columns: ['contractSymbol', 'lastTradeDate', 'strike', 'lastPrice', 'bid', 'ask', 'change', 'percentChange', 'volume', 'openInterest', 'impliedVolatility', 'inTheMoney', 'contractSize', 'currency']
+
+  Sample calls:
+        contractSymbol             lastTradeDate  ...  contractSize  currency
+0  AAPL251010C00110000 2025-09-10 13:42:10+00:00  ...       REGULAR       USD
+1  AAPL251010C00120000 2025-09-23 16:28:21+00:00  ...       REGULAR       USD
+2  AAPL251010C00135000 2025-09-25 18:40:07+00:00  ...       REGULAR       USD
+3  AAPL251010C00140000 2025-10-01 16:28:29+00:00  ...       REGULAR       USD
+4  AAPL251010C00150000 2025-09-18 14:23:48+00:00  ...       REGULAR       USD
+
+[5 rows x 14 columns]
+
+================================================================================
+ANALYST RECOMMENDATIONS
+================================================================================
+
+1. recommendations:
+  Shape: (4, 6)
+  Columns: ['period', 'strongBuy', 'buy', 'hold', 'sell', 'strongSell']
+
+  Last 20 recommendations:
+  period  strongBuy  buy  hold  sell  strongSell
+0     0m          5   24    14     2           3
+1    -1m          5   23    15     1           3
+2    -2m          5   22    15     1           1
+3    -3m          5   23    15     1           1
+
+2. recommendations_summary:
+  Shape: (4, 6)
+  Columns: ['period', 'strongBuy', 'buy', 'hold', 'sell', 'strongSell']
+
+  Data:
+  period  strongBuy  buy  hold  sell  strongSell
+0     0m          5   24    14     2           3
+1    -1m          5   23    15     1           3
+2    -2m          5   22    15     1           1
+3    -3m          5   23    15     1           1
+
+3. analyst_price_targets:
+  Type: <class 'dict'>
+    current: 258.02
+    high: 310.0
+    low: 175.0
+    mean: 246.2186
+    median: 245.0
+
+================================================================================
+CALENDAR & EVENTS
+================================================================================
+
+1. calendar:
+  Type: <class 'dict'>
+    Dividend Date: 2025-08-13
+    Ex-Dividend Date: 2025-08-10
+    Earnings Date: [datetime.date(2025, 10, 30)]
+    Earnings High: 1.83
+    Earnings Low: 1.63
+    Earnings Average: 1.76216
+    Revenue High: 103220000000
+    Revenue Low: 97854000000
+    Revenue Average: 101719746060
+
+================================================================================
+EDGE CASES & QUIRKS
+================================================================================
+
+1. Invalid ticker:
+  Empty DataFrame: True
+  Info dict empty or minimal: True
+
+2. Recently delisted stock (if any):
+
+3. Ticker with no dividends (GOOGL):
+  Dividends empty: False
+
+4. International ticker (Toyota - 7203.T):
+  Has data: True
+  Columns: ['Open', 'High', 'Low', 'Close', 'Volume', 'Dividends', 'Stock Splits']
+
+================================================================================
+DOWNLOAD vs HISTORY COMPARISON
+================================================================================
+
+1. yf.download():
+  Type: <class 'pandas.core.frame.DataFrame'>
+  Shape: (6, 5)
+  Columns: [('Close', 'AAPL'), ('High', 'AAPL'), ('Low', 'AAPL'), ('Open', 'AAPL'), ('Volume', 'AAPL')]
+
+2. Ticker.history():
+  Type: <class 'pandas.core.frame.DataFrame'>
+  Shape: (6, 7)
+  Columns: ['Open', 'High', 'Low', 'Close', 'Volume', 'Dividends', 'Stock Splits']
+
+3. Multi-ticker download:
+  Type: <class 'pandas.core.frame.DataFrame'>
+  Shape: (6, 15)
+  Columns structure: MultiIndex([( 'Close',  'AAPL'),
+            ( 'Close', 'GOOGL'),
+            ( 'Close',  'MSFT'),
+            (  'High',  'AAPL'),
+            (  'High', 'GOOGL'),
+            (  'High',  'MSFT'),
+            (   'Low',  'AAPL'),
+            (   'Low', 'GOOGL'),
+            (   'Low',  'MSFT'),
+            (  'Open',  'AAPL'),
+            (  'Open', 'GOOGL'),
+            (  'Open',  'MSFT'),
+            ('Volume',  'AAPL'),
+            ('Volume', 'GOOGL'),
+            ('Volume',  'MSFT')],
+           names=['Price', 'Ticker'])
+  Column levels: 2
+
+================================================================================
+EXPLORATION COMPLETE
+================================================================================

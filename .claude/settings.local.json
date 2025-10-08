@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(python -m pytest tests/ --co -q)",
+      "Bash(python -m pytest tests/ -q)",
+      "Bash(python -m pytest tests/test_exitrule.py -v --tb=short)",
+      "Bash(python:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
